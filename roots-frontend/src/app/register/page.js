@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
 import {
   useEffect,
   useState,
 } from 'react';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
@@ -12,11 +13,11 @@ export default function RegisterPage() {
   const router = useRouter();
 
   const [form, setForm] = useState({
-    username: '',
-    email: '',
-    confirmEmail: '',
-    password: '',
-    confirmPassword: '',
+    username: "",
+    email: "",
+    confirmEmail: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -26,10 +27,10 @@ export default function RegisterPage() {
 
   // ✅ Redirect if already logged in
   useEffect(() => {
-    const stored = localStorage.getItem('graphinity_user');
+    const stored = localStorage.getItem("graphinity_user");
     if (stored) {
       const user = JSON.parse(stored);
-      toast.error('Please log out before registering a new account');
+      toast.error("Please log out before registering a new account");
       router.replace(`/${user.username}/edit`);
     }
   }, [router]);
@@ -42,18 +43,18 @@ export default function RegisterPage() {
     e.preventDefault();
 
     if (form.email !== form.confirmEmail) {
-      toast.error('Emails do not match');
+      toast.error("Emails do not match");
       return;
     }
 
     if (form.password !== form.confirmPassword) {
-      toast.error('Passwords do not match');
+      toast.error("Passwords do not match");
       return;
     }
 
     if (!passwordRegex.test(form.password)) {
       toast.error(
-        'Password must be 8+ chars with uppercase, number, and special character.'
+        "Password must be 8+ chars with uppercase, number, and special character."
       );
       return;
     }
@@ -62,9 +63,9 @@ export default function RegisterPage() {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}api/auth/register`,
         {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify({
             username: form.username,
             email: form.email,
@@ -75,15 +76,15 @@ export default function RegisterPage() {
 
       const data = await res.json();
       if (!res.ok) {
-        toast.error(data.message || 'Registration failed');
+        toast.error(data.message || "Registration failed");
         return;
       }
 
-      localStorage.setItem('graphinity_user', JSON.stringify(data.user));
-      toast.success('Registration successful!');
+      localStorage.setItem("graphinity_user", JSON.stringify(data.user));
+      toast.success("Registration successful!");
       router.push(`/${data.user.username}/edit`);
     } catch {
-      toast.error('Something went wrong');
+      toast.error("Something went wrong");
     }
   };
 
@@ -124,7 +125,7 @@ export default function RegisterPage() {
         <div className="relative">
           <input
             name="password"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
             className="w-full border p-2 rounded pr-10"
             value={form.password}
@@ -134,14 +135,14 @@ export default function RegisterPage() {
             className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-sm text-gray-600"
             onClick={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? '🙈' : '👁️'}
+            {showPassword ? "🙈" : "👁️"}
           </span>
         </div>
 
         <div className="relative">
           <input
             name="confirmPassword"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             placeholder="Confirm Password"
             className="w-full border p-2 rounded pr-10"
             value={form.confirmPassword}
@@ -151,12 +152,13 @@ export default function RegisterPage() {
             className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-sm text-gray-600"
             onClick={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? '🙈' : '👁️'}
+            {showPassword ? "🙈" : "👁️"}
           </span>
         </div>
 
         <p className="text-xs text-gray-500">
-          Password must be 8+ characters, include uppercase, number, special character.
+          Password must be 8+ characters, include uppercase, number, special
+          character.
         </p>
 
         <button className="bg-black text-white px-4 py-2 rounded w-full hover:bg-gray-800">
@@ -164,10 +166,10 @@ export default function RegisterPage() {
         </button>
 
         <p className="text-sm text-center text-gray-600 mt-2">
-          Already have an account?{' '}
-          <a href="/login" className="text-blue-600 hover:underline">
+          Already have an account?{" "}
+          <Link href="/login" className="text-blue-600 hover:underline">
             Login
-          </a>
+          </Link>
         </p>
       </form>
     </main>

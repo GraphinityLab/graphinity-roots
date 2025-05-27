@@ -5,6 +5,7 @@ import {
   useState,
 } from 'react';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
@@ -95,9 +96,9 @@ export default function LoginPage() {
 
         <p className="text-sm text-center text-gray-600 mt-2">
           Don{"'"}t have an account?{" "}
-          <a href="/register" className="text-blue-600 hover:underline">
+          <Link href="/register" className="text-blue-600 hover:underline">
             Register
-          </a>
+          </Link>
         </p>
       </form>
     </main>
