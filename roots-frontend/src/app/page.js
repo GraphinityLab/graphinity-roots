@@ -15,7 +15,7 @@ export default function HomePage() {
     const fetchLeaderboard = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/analytics/leaderboard`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}api/analytics/leaderboard`
         );
         const data = await res.json();
         setLeaderboard(data);

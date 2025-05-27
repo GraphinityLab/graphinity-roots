@@ -19,7 +19,7 @@ export default function PublicProfilePage() {
     const fetchUser = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/roots/${username}`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}roots/${username}`
         );
         if (!res.ok) {
           setNotFound(true);
@@ -31,7 +31,7 @@ export default function PublicProfilePage() {
 
         // Record view
         await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/${username}/view`,
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}${username}/view`,
           {
             method: "POST",
           }

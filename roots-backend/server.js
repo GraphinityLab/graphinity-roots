@@ -1,13 +1,13 @@
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import express from 'express';
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
 
-import connectDB from './config/db.js';
-import analyticsRoutes from './routes/analyticsRoutes.js';
-import authRoutes from './routes/authRoutes.js';
-import publicRoutes from './routes/publicRoutes.js';
-import userRoutes from './routes/userRoutes.js';
+import connectDB from "./config/db.js";
+import analyticsRoutes from "./routes/analyticsRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import publicRoutes from "./routes/publicRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -16,10 +16,11 @@ connectDB();
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // ✅ Explicit frontend origin
-    credentials: true, // ✅ Required for cookies
+    origin: ["http://localhost:3000", "http://192.168.2.101:3000"],
+    credentials: true,
   })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);

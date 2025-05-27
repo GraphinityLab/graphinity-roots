@@ -40,7 +40,7 @@ export default function EditProfilePage() {
 
     const fetchData = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/roots/${username}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}roots/${username}`);
         const data = await res.json();
         setUserData(data);
         setBio(data.bio || '');
@@ -64,7 +64,7 @@ export default function EditProfilePage() {
   const handleSave = async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${username}/edit`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}api/user/${username}/edit`,
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -101,7 +101,7 @@ export default function EditProfilePage() {
 
     setUploading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/upload`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}api/user/upload`, {
         method: 'POST',
         credentials: 'include',
         body: formData,
@@ -134,7 +134,7 @@ export default function EditProfilePage() {
     formData.append('image', file);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/upload`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}api/user/upload`, {
         method: 'POST',
         credentials: 'include',
         body: formData,
